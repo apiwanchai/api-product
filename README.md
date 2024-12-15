@@ -113,3 +113,10 @@ This project is a RESTful API built with Node.js and Express.js, designed to han
 - **dotenv**: Environment variable management
 - **MySQL** 
 
+## Scripts
+
+| Command           | Description                   |
+|-------------------|-------------------------------|
+| `nodemon app.js`  | Start the application         |
+| `npm install`     | Install dependencies          |
+
