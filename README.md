@@ -31,7 +31,7 @@ This project is a RESTful API built with Node.js and Express.js, designed to han
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/api.git
+   git clone https://github.com/apiwanchai/api-product.git
    cd api
    ```
 
