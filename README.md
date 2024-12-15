@@ -14,8 +14,8 @@ Ensure you have the following installed on your system:
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/apiwanchai/api-product.git
+   cd api-product
    ```
 
 2. Install dependencies:
