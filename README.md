@@ -54,10 +54,7 @@ This project is a RESTful API built with Node.js and Express.js, designed to han
 4. **Set up the database**:
    - Run the SQL script `products.sql` to initialize the database.
 
-5. **Start the server**:
-   ```bash
-   npm start
-   ```
+
 
 ## API Endpoints
 
@@ -115,12 +112,4 @@ This project is a RESTful API built with Node.js and Express.js, designed to han
 - **Sequelize**: ORM for database management
 - **dotenv**: Environment variable management
 - **MySQL** 
-
-## Scripts
-
-| Command           | Description                   |
-|-------------------|-------------------------------|
-| `npm start`       | Start the application         |
-| `npm run dev`     | Run in development mode       |
-| `npm install`     | Install dependencies          |
 
