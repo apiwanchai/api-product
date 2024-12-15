@@ -1,124 +1,184 @@
-# API Project
+# Product API Documentation
 
-## Overview
+This is a Node.js-based RESTful API for managing products. The API includes authentication and CRUD operations for products.
 
-This project is a RESTful API built with Node.js and Express.js, designed to handle product-related operations. It connects to a database, performs CRUD operations, and includes a well-organized folder structure.
+## Prerequisites
 
-## Features
+Ensure you have the following installed on your system:
 
-- **CRUD Operations**: Manage products (Create, Read, Update, Delete).
-- **Middleware**: Implemented for request validation and authentication.
-- **Database Integration**: Uses SQL for product data management.
-- **Environment Configuration**: `.env` file for managing secrets and configuration.
+- Node.js (version 12 or higher)
+- npm (Node Package Manager)
 
-## Folder Structure
+## Setup Instructions
 
-```
-.
-├── config/            # Configuration files (e.g., database connection)
-├── controllers/       # Controller functions for handling requests
-├── middleware/        # Custom middleware (e.g., authentication, validation)
-├── models/            # Data models (Product model)
-├── routes/            # API route definitions
-├── .env               # Environment variables
-├── app.js             # Entry point for the application
-├── package.json       # Project dependencies
-├── products.sql       # SQL script for database setup
-└── README.md          # Project documentation
-```
+1. Clone the repository:
 
-## Installation
-
-1. **Clone the repository**:
    ```bash
-   git clone https://github.com/apiwanchai/api-product.git
-   cd api
+   git clone <repository-url>
+   cd <repository-folder>
    ```
 
-2. **Install dependencies**:
+2. Install dependencies:
+
    ```bash
    npm install
    ```
 
-3. **Set up environment variables**:
-   - Create a `.env` file in the root directory.
-   - Add the following variables:
-     ```env
-     DB_HOST=localhost
-     DB_USER=root
-     DB_PASSWORD=
-     DB_NAME=products
-     PORT=5000
-     ```
+3. Start the server:
 
-4. **Set up the database**:
-   - Run the SQL script `products.sql` to initialize the database.
+   ```bash
+   nodemon app.js
+   ```
 
+4. The server will run at:
 
+   ```
+   http://localhost:5000
+   ```
 
 ## API Endpoints
 
-### Base URL:
-`http://localhost:3000`
+### Authentication
 
-### Routes:
+#### POST `/login`
 
-| Method | Endpoint           | Description              |
-|--------|--------------------|--------------------------|
-| GET    | /api/products      | Get all products         |
-| GET    | /api/products/:id  | Get a single product     |
-| POST   | /api/products      | Add a new product        |
-| PUT    | /api/products/:id  | Update a product         |
-| DELETE | /api/products/:id  | Delete a product         |
-| POST   | /api/auth/login    | login a user             |
-| POST   | /api/auth/register | resgiter a user          |
+- **Description:** Authenticate a user and return a JWT token.
+- **Request Body:**
+  ```json
+  {
+    "username": "test",
+    "password": "test"
+  }
+  ```
+- **Response:**
+  - Success:
+    ```json
+    {
+      "token": "<jwt-token>"
+    }
+    ```
+  - Error:
+    ```json
+    {
+      "message": "Invalid credentials"
+    }
+    ```
 
-## Example Request
+### Product Management (Requires Authentication)
 
-### Add a New Product
+Add the `Authorization` header to each request:
 
-- **Endpoint**: `POST /api/products`
-- **Body**:
-   ```json
-   {
-      "sku": "P12345",
-      "name": "New Product",
-      "image": "https://example.com/image.jpg",
-      "price": 29.99,
-      "description": "This is a new product",
-      "size": "L",
-      "weight": 1.5
-   }
-   ```
-- **Response**:
-   ```json
-   {
-      "message": "Product created successfully",
-      "product": {
-         "id": 1,
-         "sku": "P12345",
-         "name": "New Product",
-         "image": "https://example.com/image.jpg",
-         "price": 29.99,
-         "description": "This is a new product",
-         "size": "L",
-         "weight": 1.5
+```
+Authorization: Bearer <jwt-token>
+```
+
+#### GET `/products`
+
+- **Description:** Retrieve all products.
+- **Query Parameters:**
+  - `page` (optional): Page number (default: 1)
+  - `pageSize` (optional): Number of items per page (default: 10)
+- **Response:**
+  ```json
+  {
+    "total": 20,
+    "page": 1,
+    "pageSize": 10,
+    "totalPages": 2,
+    "products": [
+      {
+        "sku": "P001",
+        "name": "Example Product",
+        "price": 100.00,
+        "description": "This is an example product.",
+        "size": "Medium",
+        "weight": "1kg"
       }
-   }
-   ```
+    ]
+  }
+  ```
 
-## Dependencies
+#### GET `/products/:sku`
 
-- **Node.js**: Backend JavaScript runtime
-- **Express.js**: Web framework
-- **Sequelize**: ORM for database management
-- **dotenv**: Environment variable management
-- **MySQL** 
+- **Description:** Retrieve details of a single product by SKU.
+- **Response:**
+  ```json
+  {
+    "sku": "P001",
+    "name": "Example Product",
+    "price": 100.00,
+    "description": "This is an example product.",
+    "size": "Medium",
+    "weight": "1kg"
+  }
+  ```
 
-## Scripts
+#### POST `/products`
 
-| Command           | Description                   |
-|-------------------|-------------------------------|
-| `nodemon app.js`  | Start the application         |
-| `npm install`     | Install dependencies          |
+- **Description:** Add a new product.
+- **Request Body:**
+  ```json
+  {
+    "sku": "P001",
+    "name": "New Product",
+    "price": 120.00,
+    "description": "This is a new product.",
+    "size": "Large",
+    "weight": "1.5kg"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "message": "Product created successfully"
+  }
+  ```
+
+#### PUT `/products/:sku`
+
+- **Description:** Update details of an existing product.
+- **Request Body:**
+  ```json
+  {
+    "name": "Updated Product",
+    "price": 150.00,
+    "description": "Updated product description.",
+    "size": "Small",
+    "weight": "0.8kg"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "message": "Product updated successfully"
+  }
+  ```
+
+#### DELETE `/products/:sku`
+
+- **Description:** Delete a product by SKU.
+- **Response:**
+  ```json
+  {
+    "message": "Product deleted successfully"
+  }
+  ```
+
+## Middleware
+
+### Authentication Middleware
+
+`middlewares/auth.js`:
+
+- Verifies the JWT token provided in the `Authorization` header.
+- Returns a `401` status code for missing tokens.
+- Returns a `403` status code for invalid tokens.
+
+
+
+## Notes
+
+- Replace `<repository-url>` with the actual repository URL.
+- Replace `<jwt-token>` with the token obtained from the `/login` endpoint.
+
 
