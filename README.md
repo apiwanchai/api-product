@@ -70,6 +70,8 @@ This project is a RESTful API built with Node.js and Express.js, designed to han
 | POST   | /api/products      | Add a new product        |
 | PUT    | /api/products/:id  | Update a product         |
 | DELETE | /api/products/:id  | Delete a product         |
+| POST   | /api/auth/login    | login a user             |
+| POST   | /api/auth/register | resgiter a user          |
 
 ## Example Request
 

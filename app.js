@@ -1,26 +1,20 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const { sequelize } = require('./models');
-const productRoutes = require('./routes/productRoutes');
-const authRoutes = require('./routes/authRoutes');
+const cors = require('cors');
+const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/products');
 
 const app = express();
-require('dotenv').config();
-
-
-app.use(cors({
-    origin: 'http://localhost:3000', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-    credentials: true 
-}));
+const PORT = 5000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
-app.use('/api/products', productRoutes);
-app.use('/api/auth', authRoutes);
 
-sequelize.sync({ force: false }).then(() => {
-    console.log('Database synced');
-    app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));
+app.use('/login', authRoutes);
+app.use('/products', productRoutes);
+
+
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });

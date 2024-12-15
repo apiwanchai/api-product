@@ -1,0 +1,182 @@
+[
+  {
+    "sku": "P001",
+    "name": "Ceramic Mug",
+    "image": "https://via.placeholder.com/300x200.png?text=Ceramic+Mug",
+    "price": 15,
+    "description": "Classic ceramic mug for hot beverages",
+    "size": "11oz",
+    "weight": 0.3
+  },
+  {
+    "sku": "P002",
+    "name": "Glass Water Bottle",
+    "image": "https://via.placeholder.com/300x200.png?text=Glass+Water+Bottle",
+    "price": 25,
+    "description": "Eco-friendly glass water bottle with screw cap",
+    "size": "500ml",
+    "weight": 0.4
+  },
+  {
+    "sku": "P003",
+    "name": "Dinner Plate Set",
+    "image": "https://via.placeholder.com/300x200.png?text=Dinner+Plate+Set",
+    "price": 40,
+    "description": "Set of 4 elegant dinner plates",
+    "size": "10-inch",
+    "weight": 1.2
+  },
+  {
+    "sku": "P004",
+    "name": "testza",
+    "image": "https://via.placeholder.com/300x200.png?text=Soup+Bowl",
+    "price": 12,
+    "description": "Perfect for soups and stews",
+    "size": "8-inch",
+    "weight": 0.6
+  },
+  {
+    "sku": "P005",
+    "name": "Stainless Steel Water Bottle",
+    "image": "https://via.placeholder.com/300x200.png?text=Stainless+Steel+Water+Bottle",
+    "price": 18,
+    "description": "Insulated stainless steel bottle for cold drinks",
+    "size": "750ml",
+    "weight": 0.5
+  },
+  {
+    "sku": "P006",
+    "name": "Glass Tumbler",
+    "image": "https://via.placeholder.com/300x200.png?text=Glass+Tumbler",
+    "price": 10,
+    "description": "Elegant glass tumbler for water or juice",
+    "size": "300ml",
+    "weight": 0.2
+  },
+  {
+    "sku": "P007",
+    "name": "Porcelain Teacup",
+    "image": "https://via.placeholder.com/300x200.png?text=Porcelain+Teacup",
+    "price": 8,
+    "description": "Delicate teacup made of porcelain",
+    "size": "6oz",
+    "weight": 0.1
+  },
+  {
+    "sku": "P008",
+    "name": "Plastic Water Bottle",
+    "image": "https://via.placeholder.com/300x200.png?text=Plastic+Water+Bottle",
+    "price": 5,
+    "description": "Lightweight and durable plastic water bottle",
+    "size": "1L",
+    "weight": 0.3
+  },
+  {
+    "sku": "P009",
+    "name": "Melamine Plate",
+    "image": "https://via.placeholder.com/300x200.png?text=Melamine+Plate",
+    "price": 7,
+    "description": "Durable melamine plate for everyday use",
+    "size": "9-inch",
+    "weight": 0.5
+  },
+  {
+    "sku": "P010",
+    "name": "Glass Tea Pot",
+    "image": "https://via.placeholder.com/300x200.png?text=Glass+Tea+Pot",
+    "price": 25,
+    "description": "Elegant glass teapot for brewing tea",
+    "size": "1L",
+    "weight": 0.7
+  },
+  {
+    "sku": "P011",
+    "name": "Porcelain Mug",
+    "image": "https://via.placeholder.com/300x200.png?text=Porcelain+Mug",
+    "price": 10,
+    "description": "Classic porcelain mug for coffee or tea",
+    "size": "8oz",
+    "weight": 0.3
+  },
+  {
+    "sku": "P012",
+    "name": "Ceramic Plate",
+    "image": "https://via.placeholder.com/300x200.png?text=Ceramic+Plate",
+    "price": 14,
+    "description": "Durable ceramic plate for main courses",
+    "size": "10-inch",
+    "weight": 0.7
+  },
+  {
+    "sku": "P013",
+    "name": "Bowl Set",
+    "image": "https://via.placeholder.com/300x200.png?text=Bowl+Set",
+    "price": 20,
+    "description": "Set of 4 bowls for soup or cereal",
+    "size": "6-inch",
+    "weight": 0.8
+  },
+  {
+    "sku": "P014",
+    "name": "Travel Mug",
+    "image": "https://via.placeholder.com/300x200.png?text=Travel+Mug",
+    "price": 15,
+    "description": "Insulated travel mug for hot drinks on the go",
+    "size": "12oz",
+    "weight": 0.4
+  },
+  {
+    "sku": "P015",
+    "name": "Wine Glass Set",
+    "image": "https://via.placeholder.com/300x200.png?text=Wine+Glass+Set",
+    "price": 30,
+    "description": "Set of 2 elegant wine glasses",
+    "size": "8oz",
+    "weight": 0.4
+  },
+  {
+    "sku": "P016",
+    "name": "Thermal Flask",
+    "image": "https://via.placeholder.com/300x200.png?text=Thermal+Flask",
+    "price": 20,
+    "description": "Keeps drinks hot or cold for hours",
+    "size": "500ml",
+    "weight": 0.6
+  },
+  {
+    "sku": "P017",
+    "name": "Lunch Box",
+    "image": "https://via.placeholder.com/300x200.png?text=Lunch+Box",
+    "price": 12,
+    "description": "Bento-style lunch box with compartments",
+    "size": "Medium",
+    "weight": 0.5
+  },
+  {
+    "sku": "P018",
+    "name": "Chopping Board",
+    "image": "https://via.placeholder.com/300x200.png?text=Chopping+Board",
+    "price": 10,
+    "description": "Wooden chopping board for kitchen use",
+    "size": "Medium",
+    "weight": 1
+  },
+  {
+    "sku": "P019",
+    "name": "Plastic Cup Set",
+    "image": "https://via.placeholder.com/300x200.png?text=Plastic+Cup+Set",
+    "price": 8,
+    "description": "Set of 4 colorful plastic cups",
+    "size": "300ml",
+    "weight": 0.5
+  },
+  {
+    "sku": "P020",
+    "name": "Thermo Mug",
+    "image": "https://via.placeholder.com/300x200.png?text=Thermo+Mug",
+    "price": 18,
+    "description": "Thermo mug for keeping drinks at perfect temperature",
+    "size": "12oz",
+    "weight": 0.4
+  }
+]

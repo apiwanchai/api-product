@@ -1,108 +1,80 @@
-const { Product } = require("../models");
+const { readProducts, writeProducts } = require('../utils/fileHandler');
 
-exports.getAllProducts = async (req, res) => {
-  try {
-    const { page = 1, pageSize = 10 } = req.query;
+exports.getAllProducts = (req, res) => {
+    const { page = 1, pageSize = 5 } = req.query;
+    const products = readProducts();
 
-    const offset = (page - 1) * pageSize;
+    const total = products.length;
+    const totalPages = Math.ceil(total / pageSize);
+    const paginatedProducts = products.slice((page - 1) * pageSize, page * pageSize);
 
-    const products = await Product.findAll({
-      limit: parseInt(pageSize),
-      offset: parseInt(offset),
-    });
-
-    const totalProducts = await Product.count();
     res.json({
-      total: totalProducts,
-      page: parseInt(page, 10),
-      pageSize: parseInt(pageSize, 10),
-      totalPages: Math.ceil(totalProducts / pageSize),
-      products,
+        total,
+        page: Number(page),
+        pageSize: Number(pageSize),
+        totalPages,
+        products: paginatedProducts,
     });
-  } catch (error) {
-    console.error("Error fetching products:", error.message);
-    res
-      .status(500)
-      .json({ message: "Failed to fetch products", error: error.message });
-  }
 };
 
-exports.getProductById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const product = await Product.findOne({ where: { id } });
-
-    if (!product) return res.status(404).json({ message: "Product not found" });
-
+exports.getProductBySku = (req, res) => {
+    const products = readProducts();
+    const product = products.find((p) => p.sku === req.params.sku);
+    if (!product) return res.status(404).json({ message: 'Product not found' });
     res.json(product);
-  } catch (error) {
-    console.error("Error fetching product by ID:", error.message);
-    res
-      .status(500)
-      .json({ message: "Failed to fetch product", error: error.message });
-  }
 };
 
-exports.createProduct = async (req, res) => {
-  try {
-    const { sku, name, image, price, description, size, weight } = req.body;
-    const product = await Product.create({
-      sku,
-      name,
-      image,
-      price,
-      description,
-      size,
-      weight,
-    });
-    res.json(product);
-  } catch (error) {
-    console.error("Error creating product:", error.message);
-    res
-      .status(400)
-      .json({ message: "Failed to create product", error: error.message });
-  }
-};
+function isValidProduct(product) {
+    const requiredFields = ['sku', 'name', 'image', 'price', 'description', 'size', 'weight'];
+    for (const field of requiredFields) {
+        if (!product[field] || product[field].toString().trim() === '') {
+            return { valid: false, field };
+        }
+    }
+    return { valid: true };
+}
+exports.createProduct = (req, res) => {
+    const products = readProducts();
+    const newProduct = req.body;
 
-exports.updateProduct = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { sku, name, image, price, description, size, weight } = req.body;
-
-    const result = await Product.update(
-      { sku, name, image, price, description, size, weight },
-      { where: { id } }
-    );
-
-    if (result[0] === 0) {
-      return res.status(404).json({ message: "Product not found" });
+    const validation = isValidProduct(newProduct);
+    if (!validation.valid) {
+        return res.status(400).json({ message: `Field '${validation.field}' cannot be empty` });
     }
 
-    const updatedProduct = await Product.findByPk(id);
+   
+    if (products.some((p) => p.sku === newProduct.sku)) {
+        return res.status(400).json({ message: 'Product SKU already exists' });
+    }
 
-    res.json({
-      message: "Product updated",
-      product: updatedProduct,
-    });
-  } catch (error) {
-    console.error("Error updating product:", error.message);
-    res
-      .status(400)
-      .json({ message: "Failed to update product", error: error.message });
-  }
+    products.push(newProduct);
+    writeProducts(products);
+    res.status(201).json({data:newProduct,message: "Product created successfully"});
 };
 
-exports.deleteProduct = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const result = await Product.destroy({ where: { id } });
-    if (result === 0)
-      return res.status(404).json({ message: "Product not found" });
-    res.json({ message: "Product deleted" });
-  } catch (error) {
-    console.error("Error deleting product:", error.message);
-    res
-      .status(400)
-      .json({ message: "Failed to delete product", error: error.message });
-  }
+
+exports.updateProduct = (req, res) => {
+    const products = readProducts();
+    const index = products.findIndex((p) => p.sku === req.params.sku);
+    if (index === -1) return res.status(404).json({ message: 'Product not found' });
+
+    if (req.body.sku && req.body.sku !== products[index].sku) {
+        return res.status(400).json({ message: 'SKU cannot be modified' });
+    }
+
+    products[index] = { ...products[index], ...req.body };
+    writeProducts(products);
+    res.json({data:products[index],message: "Product updated successfully"});
+};
+
+
+
+exports.deleteProduct = (req, res) => {
+    const products = readProducts();
+    const index = products.findIndex((p) => p.sku === req.params.sku);
+    if (index === -1) return res.status(404).json({ message: 'Product not found' });
+
+    const deletedProduct = products.splice(index, 1);
+    writeProducts(products);
+    res.json({data:deletedProduct,message: "Product deleted successfully"});
 };
