@@ -140,6 +140,7 @@ Authorization: Bearer <jwt-token>
 - **Request Body:**
   ```json
   {
+    "sku": "P001",
     "name": "Updated Product",
     "price": 150.00,
     "description": "Updated product description.",
